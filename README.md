@@ -8,7 +8,8 @@ If variance and mean of a large data set are calculated / available in batches,
 `pairwise_statistics.StatisticsAggregator` can be used to combine these into the mean and variance of the total data set.
 
 ```python
-# Start with statistics (sample count, mean and variance) of two data subsets `array_a` and `array_b`
+# Start with statistics (sample count, mean and variance)
+# of two data subsets `array_a` and `array_b`
 array_a = np.array([1,3,5,6])
 array_b = np.array([1,3,4])
 n_a = len(array_a)
@@ -22,7 +23,9 @@ var_b = np.var(array_b)
 sa = StatisticsAggregator(n_a, mean_a, var_a)
 sa.add(n_b, mean_b, var_b)
 
-# Check that the StatiticsAggregator `sa` reproduces the sample count (sa.n), mean (sa.mean) and variance (sa.var) of the concatenated, total dataset `array_c`
+# Check that the StatiticsAggregator `sa` reproduces the
+# sample count (sa.n), mean (sa.mean) and variance (sa.var)
+# of the concatenated, total dataset `array_c`
 array_c = np.hstack([array_a,array_b])
 n_c = len(array_c)
 mean_c = np.mean(array_c)
