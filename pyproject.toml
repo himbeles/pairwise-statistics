@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pairwise-statistics"
+authors = [
+  { name="Luis Riegger", email="lri@me.com" },
+]
+description = "Pairwise aggregated statistics"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = []
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "build",
+    "twine",
+    "numpy",
+    "flake8"
+] 
+
+[tool.setuptools_scm]
+version_scheme = "release-branch-semver"
