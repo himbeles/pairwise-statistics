@@ -4,7 +4,8 @@ import pytest
 
 
 @pytest.mark.parametrize("ddof", [0, 1])
-def test_aggregator(ddof):
+@pytest.mark.parametrize("use_robust_mean", [True, False])
+def test_aggregator(ddof, use_robust_mean):
     # combine statistics of array a and b
     array_a = np.array([1, 3, 5, 6])
     array_b = np.array([1, 3, 4])
@@ -15,7 +16,9 @@ def test_aggregator(ddof):
     var_a = np.var(array_a, ddof=ddof)
     var_b = np.var(array_b, ddof=ddof)
 
-    sa = StatisticsAggregator(n_a, mean_a, var_a, ddof=ddof)
+    sa = StatisticsAggregator(
+        n_a, mean_a, var_a, ddof=ddof, use_robust_mean=use_robust_mean
+    )
     sa.add(n_b, mean_b, var_b)
 
     # result should be variance and mean of concatenated, total array

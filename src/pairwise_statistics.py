@@ -1,5 +1,5 @@
 class StatisticsAggregator:
-    def __init__(self, n, mean, var, ddof: int = 0):
+    def __init__(self, n, mean, var, ddof: int = 0, use_robust_mean: bool = True):
         """Aggregator for batch processing of second order statisitics.
 
         If variance and mean of a large data set are calculated
@@ -15,6 +15,8 @@ class StatisticsAggregator:
                 in the calculation of the variance norm is `n - ddof`,
                 where `n` represents the number of elements.
                 By default `ddof` is zero (biased estimator).
+            use_robust_mean: use numerically robust, but slightly slower
+                method for mean aggregation
         """
         self._n = n
         self._mean = mean
@@ -22,6 +24,7 @@ class StatisticsAggregator:
         self._M2 = var * self._ddof_norm(
             n
         )  # store rescaled variance to prevent numerical inaccuracies
+        self._use_robust_mean = use_robust_mean
 
     @property
     def var(self):
@@ -63,7 +66,10 @@ class StatisticsAggregator:
 
         # update mean
         delta = mean_add - self.mean
-        self._mean += delta * n_add / self.n
+        if self._use_robust_mean:
+            self._mean = (self.mean * n_old + mean_add * n_add) / (self.n)
+        else:
+            self._mean += delta * n_add / self.n
 
         # update variance (M2 / n)
         M2_new = var_add * self._ddof_norm(n_add)
