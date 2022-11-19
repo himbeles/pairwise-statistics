@@ -1,3 +1,5 @@
+[![Test](https://github.com/himbeles/pairwise-statistics/actions/workflows/python-package.yml/badge.svg)](https://github.com/himbeles/pairwise-statistics/actions/workflows/python-package.yml)
+
 # Pairwise Aggregated Statistics
 
 Python package for batch / parallel processing of second order statisitics.
