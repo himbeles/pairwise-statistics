@@ -25,7 +25,7 @@ var_a = np.var(array_a)
 var_b = np.var(array_b)
 
 # Combine statistics using StatisticsAggregator
-sa = StatisticsAggregator(ddof=ddof, use_robust_mean=use_robust_mean)
+sa = StatisticsAggregator()
 sa.add(n_a, mean_a, var_a)
 sa.add(n_b, mean_b, var_b)
 
